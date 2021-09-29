@@ -1,0 +1,28 @@
+body {
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+.heading h1 {
+  color: blue;
+  font-weight: 900;
+}
+.heading p {
+  margin-left: 30px;
+}
+.heading a:hover {
+  color: red;
+}
+
+.content h2 {
+  border-left: 8px solid red;
+  border-bottom: 15px solid red;
+  font-weight: 700;
+}
+.content ul li:last-child {
+  text-decoration: line-through;
+}
+.content img {
+  border: 20px solid rgba(0, 0, 0, 0.5);
+}
+
+/*# sourceMappingURL=app.css.map */
