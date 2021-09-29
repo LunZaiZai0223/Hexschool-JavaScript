@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  // border: 1px solid red;
+}
+
+.container {
+  width: 70%;
+  margin: 50px auto;
+  .header {
+    padding: 40px;
+    border: 1px solid #111;
+    color: rgba(0, 0, 0, 0.5);
+  }
+  .content {
+    padding: 20px;
+    border: 2px solid red;
+  }
+  .content p {
+    color: #3a86ff;
+    margin: 0 0 20px;
+  }
+  .content .btn {
+    margin: 0 0 120px;
+  }
+  .content .btn a {
+    color: #fff;
+    background-color: #00b4d8;
+    padding: 5px 30px;
+    text-decoration: none;
+  }
+  .footer {
+    text-align: center;
+    background-color: #ff758f;
+    padding: 15px 0;
+  }
+}
