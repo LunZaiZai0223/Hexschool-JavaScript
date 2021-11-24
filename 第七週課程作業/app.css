@@ -1,0 +1,282 @@
+/*
+colors
+ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body h1 {
+  font-size: 24px;
+  color: #00807E;
+}
+body label {
+  font-size: 16px;
+  color: #00807E;
+}
+body p {
+  font-size: 16px;
+}
+body span {
+  font-size: 16px;
+}
+body ul li {
+  list-style-type: none;
+}
+body button {
+  cursor: pointer;
+}
+
+.addTickets-wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 920px;
+  margin: 120px auto 100px;
+  padding: 60px 95px;
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 12px;
+}
+@media (max-width: 768px) {
+  .addTickets-wrapper {
+    margin: 25px auto;
+    padding: 0 16px 60px;
+    width: 90%;
+    flex-direction: column;
+    align-content: center;
+  }
+}
+.addTickets-wrapper .imgs-wrapper {
+  flex: 1;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .addTickets-wrapper .imgs-wrapper img:last-of-type {
+    display: none;
+  }
+}
+.addTickets-wrapper .addTickets-form {
+  flex: 1;
+}
+
+.addTickets-form {
+  display: flex;
+  flex-direction: column;
+}
+.addTickets-form .header {
+  border-bottom: 3px solid #007572;
+  margin-bottom: 40px;
+}
+.addTickets-form .form-wrapper {
+  margin-bottom: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.addTickets-form .form-wrapper input {
+  min-height: 38px;
+}
+.addTickets-form .form-wrapper input,
+.addTickets-form .form-wrapper select,
+.addTickets-form .form-wrapper textarea {
+  font-size: 1rem;
+  width: 75%;
+  background-color: #FAFAFA;
+  border: none;
+  border-bottom: 1px solid #007572;
+  padding: 8px 12px;
+}
+.addTickets-form .form-wrapper select {
+  color: #818A91;
+}
+.addTickets-form .form-wrapper textarea {
+  max-height: 111px;
+}
+.addTickets-form .form-wrapper .validation-feedback {
+  display: none;
+  width: 100%;
+  margin-top: 5px;
+}
+.addTickets-form .form-wrapper .validation-feedback span {
+  flex: 1;
+}
+.addTickets-form .form-wrapper .validation-feedback .validation-msg {
+  flex: 3;
+}
+.addTickets-form .form-wrapper:last-of-type {
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+.addTickets-form button {
+  font-size: 20px;
+  border: none;
+  padding: 10px 40px;
+  align-self: flex-end;
+  color: #ffff;
+  background-color: #00807E;
+}
+
+/*
+form validation
+ */
+.addTickets-form.has-validation .form-wrapper.valid .validation-feedback {
+  display: flex;
+  color: green;
+}
+.addTickets-form.has-validation .form-wrapper.invalid .validation-feedback {
+  display: flex;
+  color: red;
+}
+
+.cards-wrapper {
+  background-color: #F7F7F7;
+  padding-bottom: 120px;
+  padding-top: 56px;
+}
+
+.search-area {
+  display: grid;
+  grid-template-columns: calc(100% - 200px) 180px;
+  gap: 20px;
+  max-width: 920px;
+  margin: 0 auto;
+  padding-bottom: 48px;
+}
+
+.select-filter-wrapper {
+  display: flex;
+  align-items: center;
+}
+.select-filter-wrapper select[name=area] {
+  min-height: 38px;
+  border: 1px solid #CED4DA;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 255px;
+  margin-right: 30px;
+  font-size: 1rem;
+  background-color: #FAFAFA;
+  color: #818A91;
+  padding: 8px 12px;
+}
+.select-filter-wrapper .search-result-msg {
+  color: #818A91;
+}
+@media (max-width: 768px) {
+  .select-filter-wrapper {
+    justify-content: center;
+  }
+}
+
+.cards-list {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+@media (max-width: 768px) {
+  .cards-list {
+    display: block;
+  }
+}
+.cards-list li {
+  width: 31.3333%;
+  margin-right: 2%;
+  margin-bottom: 3%;
+}
+@media (max-width: 768px) {
+  .cards-list li {
+    width: 80%;
+    margin: 0 auto 5%;
+    border-radius: 4px;
+  }
+}
+
+.card {
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 4px;
+  position: relative;
+}
+.card .area-sticker {
+  position: absolute;
+  top: -3%;
+  left: 0;
+  background-color: #64C3BF;
+  color: #fff;
+  font-size: 20px;
+  padding: 8px 20px;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  z-index: 99;
+}
+.card .rate-sticker {
+  position: absolute;
+  top: 33%;
+  left: 0;
+  background-color: #00807E;
+  color: #fff;
+  font-size: 16px;
+  padding: 5px 8px;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  z-index: 99;
+}
+.card .card-image-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+.card .card-image-wrapper img {
+  width: 100%;
+  max-width: 100%;
+  height: 180px;
+  display: block;
+  transform: scale(1);
+  object-fit: cover;
+  object-position: center center;
+  transition: transform 0.3s;
+}
+.card .card-image-wrapper img:hover {
+  transform: scale(1.2);
+}
+.card .card-content {
+  padding: 20px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card .card-text {
+  color: #818A91;
+  line-height: 24px;
+}
+.card .card-header {
+  margin-bottom: 20px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #007572;
+}
+.card .card-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card .card-info .left-counter {
+  font-weight: 500;
+  color: #00807E;
+}
+.card .card-info .left-counter i {
+  margin-right: 6px;
+}
+.card .card-info .price-wrapper {
+  display: flex;
+  align-items: center;
+  color: #00807E;
+}
+.card .card-info .price-wrapper .price {
+  margin-left: 4px;
+  font-size: 32px;
+  font-weight: 500;
+}
+
+/*# sourceMappingURL=app.css.map */

@@ -1,0 +1,313 @@
+/*
+colors
+ */
+$color-white: #ffff;
+$color-box-shadow-grey: #00000029;
+$color-text-grey: #818A91;
+$color-input-bg-grey: #FAFAFA;
+$color-text-green: #00807E;
+$color-sticker-green: #64C3BF;
+$color-underline-green: #007572;
+@mixin iPad {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  h1 {
+    font-size: 24px;
+    color: $color-text-green;
+  }
+  label {
+    font-size: 16px;
+    color: $color-text-green;
+    }
+  p {
+    font-size: 16px;
+    }
+  span {
+    font-size: 16px;
+    // color: $color-text-green;
+  }
+  ul li {
+    list-style-type: none;
+  }
+  button {
+    cursor: pointer;
+  }
+}
+
+
+
+.addTickets-wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 920px;
+  margin: 120px auto 100px; 
+  padding: 60px 95px;
+  // gap: 30px;
+  box-shadow: 0px 3px 6px $color-box-shadow-grey;
+  border-radius: 12px;
+  @include iPad {
+    margin: 25px auto;
+    padding: 0 16px 60px;
+    width: 90%;
+    flex-direction: column;
+    align-content: center;
+  }
+  .imgs-wrapper {
+    flex: 1;
+    text-align: center;
+    img:last-of-type {
+      @include iPad {
+        display: none;
+      }
+    }
+  }
+  .addTickets-form {
+    flex: 1;
+  }
+}
+.addTickets-form {
+  display: flex;
+  flex-direction: column;
+  .header {
+    border-bottom: 3px solid $color-underline-green;
+    margin-bottom: 40px;
+  }
+  .form-wrapper {
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    label {
+      // margin-right: 30px;
+      // flex: 1;
+    }
+    input {
+      // width: 72%;
+      min-height: 38px;
+    }
+    input,
+    select,
+    textarea {
+      font-size: 1rem;
+      // flex: 3;
+      width: 75%;
+      background-color: $color-input-bg-grey;
+      border: none;
+      border-bottom: 1px solid $color-underline-green;
+      padding: 8px 12px;
+    }
+    select {
+      color: $color-text-grey;
+    }
+    textarea {
+      max-height: 111px;
+    } 
+    .validation-feedback {
+      display: none;
+      width: 100%;
+      margin-top: 5px;
+      span {
+        flex: 1;
+      }
+      .validation-msg {
+        flex: 3;
+      }
+    }
+  }
+  .form-wrapper:last-of-type {
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+  button {
+    font-size: 20px;
+    border: none;
+    padding: 10px 40px;
+    align-self: flex-end;
+    color: #ffff;
+    background-color: $color-text-green;
+  }
+}
+/*
+form validation
+ */
+.addTickets-form.has-validation {
+  .form-wrapper.valid {
+    .validation-feedback {
+      display: flex;
+      color: green;
+    }
+  }
+  .form-wrapper.invalid {
+    .validation-feedback {
+      display: flex;
+      color: red;
+    }
+  }
+}
+// .imgs-wrapper {
+//   display: flex;
+//   flex-direction: column;
+//   img {
+//     // display: block;
+//   }
+// }
+.cards-wrapper {
+  background-color: #F7F7F7;
+  padding-bottom: 120px;
+  padding-top: 56px;
+}
+.search-area {
+  display: grid;
+  grid-template-columns: calc(100% - 200px) 180px;
+  gap: 20px;
+  max-width: 920px;
+  margin: 0 auto;
+  padding-bottom: 48px;
+}
+.select-filter-wrapper {
+  // width: 100%;
+  // max-width: 920px;
+  // margin: 0 auto;
+  // padding-bottom: 48px;
+  display: flex;
+  align-items: center;
+  select[name="area"] {
+    min-height: 38px;
+    border: 1px solid #CED4DA;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 255px;
+    margin-right: 30px;
+    font-size: 1rem;
+    background-color: $color-input-bg-grey;
+    color: $color-text-grey;
+    padding: 8px 12px;
+  }
+  .search-result-msg {
+    color: $color-text-grey;
+  }
+  @include iPad {
+    justify-content: center;
+  }
+}
+.cards-list {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  flex-wrap: wrap;
+  // justify-content: space-between;
+  // gap: 30px;
+  margin: 0 auto;
+  @include iPad {
+    display: block;
+  }
+  li {
+    width: 31.3333%; 
+    margin-right: 2%; 
+    margin-bottom: 3%;
+    @include iPad {
+      width: 80%;
+      margin: 0 auto 5%;
+      border-radius: 4px;
+    }
+  }
+}
+.card {
+  box-shadow: 0px 3px 6px $color-box-shadow-grey;
+  border-radius: 4px;
+  position: relative;
+  .area-sticker {
+    position: absolute;
+    top: - 3%;
+    left: 0;
+    background-color: $color-sticker-green;
+    color: #fff;
+    font-size: 20px;
+    padding: 8px 20px;
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+    z-index: 99;
+  }
+  .rate-sticker {
+    position: absolute;
+    top: 33%;
+    left: 0;
+    background-color: $color-text-green;
+    color: #fff;
+    font-size: 16px;
+    padding: 5px 8px;
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+    z-index: 99;
+  }
+  .card-image-wrapper {
+    // width: 350px;
+    // height: 180px;
+    overflow: hidden;
+    position: relative;
+    img {
+      width: 100%;
+      max-width: 100%;
+      height: 180px;
+      display: block;
+      transform: scale(1);
+      object-fit: cover;
+      object-position: center center;
+      transition: transform .3s;
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+  .card-content {
+    padding: 20px;
+    // height: calc(100% - 180px);
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .card-text {
+    // padding: 16px 20px 32px;
+    color: $color-text-grey;
+    line-height: 24px;
+  }
+  .card-header {
+    margin-bottom: 20px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid $color-underline-green;
+  }
+  .card-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // padding: 0 20px 14px;
+    .left-counter {
+      font-weight: 500;
+      color: $color-text-green;
+      i {
+        margin-right: 6px;
+      }
+    }
+    .price-wrapper {
+      display: flex;
+      align-items: center;
+      color: $color-text-green;
+      .price {
+        margin-left: 4px;
+        font-size: 32px;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
