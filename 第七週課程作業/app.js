@@ -154,21 +154,6 @@ const Controller = (() => {
     } else {
       _render(Tickets.getData());
     }
-    // UseAxiso._getData()
-    // .then(response => {      
-    //   let result = _destructuring(response);
-    //   if (formValue !== 'all') {
-    //   console.log(`選擇的地區：${formValue}`);
-    //   // 只要篩選的資料
-    //   result = result.filter(obj => obj.area === formValue);
-    //   console.log('搜尋結果', result);
-    //   _render(result);
-    // } else {
-    //   console.log('選了全部地區');
-    //   console.log(result);
-    //   _render(result);
-    // }
-    // }).catch(error => console.log(error));
   }
   function _submitHandler (event) {
     event.preventDefault();
