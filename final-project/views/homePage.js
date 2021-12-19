@@ -1,4 +1,5 @@
-import getAllProductsData from '../api.js';
+import { getAllProductsData, addProductsIntoCart, getCartProductsData } from '../api.js';
+import { render, showAddingProductAlert, hideAddingProductAlert } from '../utils.js';
 
 console.log(getAllProductsData);
 
@@ -14,6 +15,20 @@ function getSelectOptionKeys (allProductsData) {
   console.log(optionsArr);
   return optionsArr;
 }
+
+// 要不然就是先打 api
+// 阿靠腰，那之後也要把這個更新耶= =
+// 哭啊！！
+async function checkCartItemNum () {
+  console.log('來確認購物車了喔');
+  const cartData = await getCartProductsData();
+  console.log(cartData);
+  const cartItemLength = cartData.carts.length;
+  const cartIcon = document.querySelector('#cart-icon');
+  cartIcon.setAttribute('data-after', cartItemLength);
+}
+
+checkCartItemNum();
 
 // 創造 option
 function createSelectOptionsEle (optionsArr) {
@@ -33,14 +48,18 @@ function createProductCardLiELe (allProductsData) {
   let card = '';
   allProductsData.forEach((product) => {
     card += `<li class="productCard">
-          <h4 class="productType">新品</h4>
+          <h4 class="productType">${product.category}</h4>
           <img
             src="${product.images}"
             alt="">
           <a href="#" class="addCardBtn" data-product-id="${product.id}">加入購物車</a>
-          <h3>${product.title}</h3>
-          <del class="originPrice">NT$${product.origin_price}</del>
-          <p class="nowPrice">NT$${product.price}</p>
+          <div class="card-content">
+            <h3>${product.title}</h3>
+            <div class="card-price-wrapper">
+              <del class="originPrice">NT$${product.origin_price.toLocaleString('en-US')}</del>
+              <p class="nowPrice">NT$${product.price.toLocaleString('en-US')}</p>
+            </div>
+          </div>
         </li>`;
   });
 
@@ -311,92 +330,7 @@ const HomePage = {
         ${createProductCardLiELe(allProductsData)}
       </ul>
     </section>
-    <section class="shoppingCart">
-      <h3 class="section-title">我的購物車</h3>
-      <div class="overflowWrap">
-        <table class="shoppingCart-table">
-          <tr>
-            <th width="40%">品項</th>
-            <th width="15%">單價</th>
-            <th width="15%">數量</th>
-            <th width="15%">金額</th>
-            <th width="15%"></th>
-          </tr>
-          <tr>
-            <td>
-              <div class="cardItem-title">
-                <img src="https://i.imgur.com/HvT3zlU.png" alt="">
-                <p>Antony 雙人床架／雙人加大</p>
-              </div>
-            </td>
-            <td>NT$12,000</td>
-            <td>1</td>
-            <td>NT$12,000</td>
-            <td class="discardBtn">
-              <a href="#" class="material-icons">
-                clear
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <a href="#" class="discardAllBtn">刪除所有品項</a>
-            </td>
-            <td></td>
-            <td></td>
-            <td>
-              <p>總金額</p>
-            </td>
-            <td>NT$13,980</td>
-          </tr>
-        </table>
-      </div>
-    </section>
-
-    <section class="orderInfo wrap" id="orderInfo">
-      <h3 class="section-title">填寫預訂資料</h3>
-      <form action="" class="orderInfo-form">
-        <div class="orderInfo-formGroup">
-          <label for="customerName" class="orderInfo-label">姓名</label>
-          <div class="orderInfo-inputWrap">
-            <input type="text" class="orderInfo-input" id="customerName" placeholder="請輸入姓名" name="姓名">
-            <p class="orderInfo-message" data-message="姓名">必填</p>
-          </div>
-        </div>
-        <div class="orderInfo-formGroup">
-          <label for="customerPhone" class="orderInfo-label">電話</label>
-          <div class="orderInfo-inputWrap">
-            <input type="tel" class="orderInfo-input" id="customerPhone" placeholder="請輸入電話" name="電話">
-            <p class="orderInfo-message" data-message="電話">必填</p>
-          </div>
-        </div>
-        <div class="orderInfo-formGroup">
-          <label for="customerEmail" class="orderInfo-label">Email</label>
-          <div class="orderInfo-inputWrap">
-            <input type="email" class="orderInfo-input" id="customerEmail" placeholder="請輸入 Email" name="Email">
-            <p class="orderInfo-message" data-message="Email">必填</p>
-          </div>
-        </div>
-        <div class="orderInfo-formGroup">
-          <label for="customerAddress" class="orderInfo-label">寄送地址</label>
-          <div class="orderInfo-inputWrap">
-            <input type="text" class="orderInfo-input" id="customerAddress" placeholder="請輸入寄送地址" name="寄送地址">
-            <p class="orderInfo-message" data-message="寄送地址">必填</p>
-          </div>
-        </div>
-        <div class="orderInfo-formGroup">
-          <label for="tradeWay" class="orderInfo-label">交易方式</label>
-          <div class="orderInfo-inputWrap">
-            <select id="tradeWay" class="orderInfo-input" name="交易方式">
-              <option value="ATM" selected>ATM</option>
-              <option value="信用卡">信用卡</option>
-              <option value="超商付款">超商付款</option>
-            </select>
-          </div>
-        </div>
-        <input type="submit" value="送出預訂資料" class="orderInfo-btn">
-      </form>
-    </section>`);
+    `);
 
     return ele;
   },
@@ -467,8 +401,13 @@ const HomePage = {
 
   addProductListClickEvent: async () => {
     // data-product-list
-    document.querySelector('[data-product-list]').addEventListener('click', (event) => console.log(event));
+    document.querySelector('[data-product-list]').addEventListener('click', handleClickAddProductsIntoCart);
+  },
 
+  addSelectChangeEvent: async () => {
+    // data-product-select
+    document.querySelector('[data-product-select]').addEventListener('change', handleChangeSelectProducts);
+    // render again!
   },
 
   checkHaveAllProductsDataLocally: () => {
@@ -488,5 +427,36 @@ const HomePage = {
 
 
 };
+
+// Add Product to cart event
+async function handleClickAddProductsIntoCart (event) {
+  event.preventDefault();
+  const target = event.target.dataset;
+  const productId = getProductId(target);
+  if (productId) {
+    console.log('adding product into cart');
+    await addProductsIntoCart(productId);
+    setTimeout(checkCartItemNum, 1000);
+    showAddingProductAlert();
+  }
+}
+
+function getProductId ({ productId }) {
+  console.log(productId);
+  return productId;
+}
+
+// select change event 
+function handleChangeSelectProducts (event) {
+  const selectKeyword = event.target.value;
+  const filterResult = getSelectFilterResult(selectKeyword);
+  const productLiEles = createProductCardLiELe(filterResult);
+  render(document.querySelector('[data-product-list]'), productLiEles);
+}
+
+// get filter result
+function getSelectFilterResult (selectKeyword) {
+  return selectKeyword === '全部' ? allProductsData : allProductsData.filter((product) => product.category === selectKeyword);
+}
 
 export default HomePage;
