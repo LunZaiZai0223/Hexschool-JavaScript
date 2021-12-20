@@ -969,6 +969,11 @@ body {
   z-index: 2;
   transform: translate(-50%, -50%);
 }
+@media (max-width: 768px) {
+  #loading {
+    left: 45%;
+  }
+}
 #loading.is-active {
   display: block;
 }

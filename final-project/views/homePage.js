@@ -437,6 +437,10 @@ async function handleClickAddProductsIntoCart (event) {
     console.log('adding product into cart');
     await addProductsIntoCart(productId);
     setTimeout(checkCartItemNum, 1000);
+    // 如果沒有用 setTimeout 延遲執行，那麼每次第一筆新增商品至購物車都不會更新到購物車的數字，
+    // 但我明明就在上一步使用 await 了，照理說應該會等到 await 的函式結束才會繼續執行，但是結果不如我預期。
+    // 請問助教這邊程式碼哪裡出了問題呢？
+    // checkCartItemNum();
     showAddingProductAlert();
   }
 }
